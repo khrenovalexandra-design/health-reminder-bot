@@ -635,13 +635,15 @@ async def main():
         logger.error("❌ Токен бота не установлен!")
         return
 
-    job_queue = JobQueue()
+
+job_queue = JobQueue()
 application = (
     Application.builder()
     .token(token)
     .job_queue(job_queue)
     .build()
 )
+
     logger.info("✅ Приложение создано, начинаем регистрацию обработчиков...")
 
     # Создаем файлы, если они отсутствуют
