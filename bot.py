@@ -634,8 +634,6 @@ async def main():
     if not token:
         logger.error("❌ Токен бота не установлен!")
         return
-
-
 job_queue = JobQueue()
 application = (
     Application.builder()
@@ -643,7 +641,6 @@ application = (
     .job_queue(job_queue)
     .build()
 )
-
     logger.info("✅ Приложение создано, начинаем регистрацию обработчиков...")
 
     # Создаем файлы, если они отсутствуют
