@@ -5,6 +5,7 @@ import time
 import calendar
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
+from telegram.ext import JobQueue
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import (
     Application,
@@ -634,8 +635,13 @@ async def main():
         logger.error("❌ Токен бота не установлен!")
         return
 
-    application = Application.builder().token(token).build()
-
+    job_queue = JobQueue()
+application = (
+    Application.builder()
+    .token(token)
+    .job_queue(job_queue)
+    .build()
+)
     logger.info("✅ Приложение создано, начинаем регистрацию обработчиков...")
 
     # Создаем файлы, если они отсутствуют
