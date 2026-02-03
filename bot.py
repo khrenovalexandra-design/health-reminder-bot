@@ -625,22 +625,20 @@ async def cleanup_past_meal_plans_and_reminders(application):
         return 0
 
 async def main():
-    """Основная функция запуска бота"""
     logger.info("🚀 Запуск бота...")
 
-    # Проверим, что токен установлен
-    import os
-    token = os.getenv("BOT_TOKEN")  # Ваш токен здесь
+    token = os.getenv("BOT_TOKEN")
     if not token:
-        logger.error("❌ Токен бота не установлен!")
-        return
-job_queue = JobQueue()
-application = (
-    Application.builder()
-    .token(token)
-    .job_queue(job_queue)
-    .build()
-)
+        raise RuntimeError("BOT_TOKEN не задан")
+
+    job_queue = JobQueue()
+
+    application = (
+        Application.builder()
+        .token(token)
+        .job_queue(job_queue)
+        .build()
+    )
     logger.info("✅ Приложение создано, начинаем регистрацию обработчиков...")
 
     # Создаем файлы, если они отсутствуют
